@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Control Financiero - Monetia</title>
+    <!-- Vinculamos el archivo de estilos CSS -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Encabezado de la aplicación -->
+    <header>
+        <h1>Control Financiero</h1>
+        <p id="fecha-actual">Gestión Personal</p>
+    </header>
+
+    <!-- Contenedor principal de la app -->
+    <main class="dashboard-container">
+
+        <!-- SECCIÓN 1: Resumen de Saldos -->
+        <section class="card balance-section">
+            <h2>Resumen del Mes</h2>
+            <div class="balance-grid">
+                <div class="balance-item ingresos">
+                    <h3>💵 Sueldo / Ingresos</h3>
+                    <p id="total-ingresos">$0,00</p>
+                </div>
+                <div class="balance-item gastos">
+                    <h3>📉 Gastado</h3>
+                    <p id="total-gastos">$0,00</p>
+                </div>
+                <div class="balance-item diferencia">
+                    <h3>📈 Diferencia</h3>
+                    <p id="total-diferencia">$0,00</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECCIÓN 2: Próximos Vencimientos -->
+        <section class="card vencimientos-section">
+            <h2>⏰ Próximos Vencimientos</h2>
+            <div class="tabla-contenedor">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Entidad / Motivo</th>
+                            <th>Vencimiento</th>
+                            <th>Monto</th>
+                            <th>Estado</th>
+                        </tr>
+                    </thead>
+                    <tbody id="lista-vencimientos">
+                        <!-- Datos de ejemplo fijos por ahora -->
+                        <tr>
+                            <td>TC Provincia</td>
+                            <td>Lunes 01/06</td>
+                            <td>$647.395,00</td>
+                            <td><span class="badge pago">Pagado</span></td>
+                        </tr>
+                        <tr>
+                            <td>Wifi</td>
+                            <td>Miércoles 10/06</td>
+                            <td>$35.000,00</td>
+                            <td><span class="badge pendiente">Pendiente</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- SECCIÓN 3: Formulario rápido para agregar movimientos diarios -->
+        <section class="card formulario-section">
+            <h2>📝 Registrar Nuevo Gasto</h2>
+            <form id="form-gasto">
+                <div class="form-group">
+                    <label for="motivo">Motivo / Descripción:</label>
+                    <input type="text" id="motivo" placeholder="Ej: Supermercado, Nafta..." required>
+                </div>
+
+                <div class="form-inline">
+                    <div class="form-group">
+                        <label for="importe">Importe ($):</label>
+                        <input type="number" id="importe" step="0.01" placeholder="0.00" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="categoria">Categoría:</label>
+                        <select id="categoria" required>
+                            <option value="Casa">Casa</option>
+                            <option value="Impuestos">Impuestos</option>
+                            <option value="Comida">Comida</option>
+                            <option value="Salud">Salud</option>
+                            <option value="Auto">Auto</option>
+                            <option value="Ocio">Ocio</option>
+                        </select>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn-guardar">Guardar Gasto</button>
+            </form>
+        </section>
+        
+        <!-- SECCIÓN 4: Lista de Movimientos -->
+        <section class="card lista-section">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
+                <h2>📋 Últimos Movimientos</h2>
+                <!-- Botón para borrar todo -->
+                <button id="btn-borrar-todo" class="badge pendiente" style="cursor:pointer; font-size:1rem;">🗑️ Borrar Todo</button>
+            </div>
+            
+            <div class="tabla-contenedor">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Fecha</th>
+                            <th>Motivo</th>
+                            <th>Categoría</th>
+                            <th>Importe</th>
+                            <th>Acción</th>
+                        </tr>
+                    </thead>
+                    <!-- Acá JavaScript va a inyectar las filas -->
+                    <tbody id="lista-movimientos">
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Vinculamos el archivo de lógica JavaScript -->
+    <script src="app.js"></script>
+</body>
+</html>

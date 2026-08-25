@@ -1,0 +1,65 @@
+DOCUMENTACIÓN DEL PROYECTO: CONTROL FINANCIERO WEB
+==================================================
+
+1. OBJETIVO DEL PROYECTO
+--------------------------------------------------
+Desarrollar una aplicación web para la gestión de finanzas personales que reemplace el uso de un archivo Excel, haciéndolo más simple, sistematizado y moderno. Este proyecto es, al mismo tiempo, un vehículo de aprendizaje para dominar JavaScript, profundizando conocimientos de HTML, CSS, y proyectando a futuro la integración de un Backend (Python/Flask + MySQL).
+
+Nombres propuestos (en evaluación): Monetia, Valia, Fintia, Equia.
+
+2. ALCANCE Y ANÁLISIS DE DATOS (Basado en el Excel original)
+--------------------------------------------------
+El sistema debe ser capaz de replicar y mejorar lo que actualmente se gestiona en Excel. Se identificaron cuatro pilares fundamentales a desarrollar:
+
+Pilar A: Motor de Cuotas y Financiaciones (El Core Complejo)
+- Procesar compras divididas en "X" cuotas.
+- Calcular el valor mensual.
+- Llevar el conteo exacto de las cuotas pagadas vs. restantes.
+- Proyectar la deuda hacia los meses futuros automáticamente.
+
+Pilar B: Panel de Control (Dashboard)
+- Vista general de ingresos vs. egresos mensuales.
+- Diferencia neta (remanente real).
+- Lista de alertas y próximos vencimientos de servicios e impuestos.
+
+Pilar C: Gestor de Movimientos Diarios
+- Formulario rápido para registrar gastos (motivo, importe, categoría).
+- Listado histórico de los movimientos realizados en el mes.
+- Acciones CRUD (Crear, Leer, Actualizar, Borrar) sobre cada movimiento.
+
+Pilar D: Ajustes Dinámicos (Configuración)
+- Administración de categorías, métodos de pago, etc.
+
+3. ESTADO ACTUAL (VERSIÓN 1.0 - FRONTEND FIRST)
+--------------------------------------------------
+Se optó por una estrategia "Frontend-First" para potenciar el aprendizaje de JavaScript interactuando con el DOM (Document Object Model) y persistencia temporal a través de LocalStorage.
+
+- UI/UX: Estilo "Glassmorphism" con Modo Oscuro Premium. Tonos azules profundos, paneles que simulan cristal esmerilado translúcido, bordes redondeados y tipografía moderna (Inter).
+- HTML (index.html): Estructura semántica montada (header, main, sections, form, table).
+- CSS (style.css): Implementación completa del diseño, variables CSS y diseño responsive básico.
+- JS (app.js): 
+  * Captura de datos vía formulario.
+  * Cálculos matemáticos en tiempo real (sumatoria de gastos, resta de ingresos).
+  * Persistencia en LocalStorage.
+  * Renderizado dinámico de tablas.
+  * Eliminación individual y masiva de registros.
+
+4. TECNOLOGÍAS INVOLUCRADAS
+--------------------------------------------------
+Fase 1 (Actual):
+- HTML5 (Estructura)
+- CSS3 (Estilos y variables)
+- JavaScript Vanilla (Lógica, DOM manipulation, LocalStorage)
+- Git / GitHub (Control de versiones, backup y portfolio)
+
+Fase 2 (Proyección a Futuro):
+- Python + Flask (Backend / API REST)
+- MySQL (Base de datos relacional para reemplazar el LocalStorage)
+
+5. PRÓXIMOS PASOS (BACKLOG)
+--------------------------------------------------
+[ ] Implementar un formulario para ingresar/editar los Ingresos (actualmente está fijo en el código).
+[ ] Añadir edición de un gasto existente (botón de "Lápiz").
+[ ] Desarrollar la sección de "Motor de Cuotas" (gestión de tarjetas de crédito).
+[ ] Vincular el sistema local a un repositorio de GitHub para tracking formal.
+[ ] Planificar el modelo Entidad-Relación para la futura base de datos MySQL.

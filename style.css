@@ -1,0 +1,240 @@
+/* Importamos la tipografía Inter */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
+
+/* --- VARIABLES GLOBALES (Fusión Oscuro Premium + Glassmorphism) --- */
+:root {
+    /* Fondos Azules Profundos */
+    --bg-color: #0B101E; /* Azul noche base */
+    --bg-gradient: radial-gradient(circle at 15% 15%, #1A2950 0%, #0B101E 100%);
+    
+    /* Cristal (Glassmorphism) */
+    --card-bg: rgba(255, 255, 255, 0.03); /* Blanco casi transparente */
+    --card-border: 1px solid rgba(255, 255, 255, 0.08); /* Borde sutil brillante */
+    --glass-blur: blur(20px); /* El efecto de vidrio esmerilado */
+    
+    /* Textos (Claros para resaltar en la oscuridad) */
+    --text-main: #F3F4F6; /* Blanco suave */
+    --text-muted: #9CA3AF; /* Gris azulado para datos secundarios */
+    
+    /* Colores Neón/Premium para los números */
+    --color-ingreso: #10B981; /* Verde esmeralda vibrante */
+    --color-gasto: #EF4444; /* Rojo brillante */
+    --color-primario: #3B82F6; /* Azul eléctrico estilo iOS */
+    
+    --radio-bordes: 24px; /* Bien redondeado */
+    --sombra-suave: 0 10px 40px rgba(0, 0, 0, 0.4); /* Sombra oscura para dar profundidad */
+}
+
+/* --- RESET BÁSICO --- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Inter', sans-serif;
+}
+
+body {
+    background-color: var(--bg-color);
+    background-image: var(--bg-gradient);
+    background-attachment: fixed;
+    color: var(--text-main);
+    line-height: 1.6;
+    padding: 2rem;
+    min-height: 100vh;
+}
+
+/* --- ENCABEZADO --- */
+header {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+header h1 {
+    font-weight: 700;
+    font-size: 2.5rem;
+    letter-spacing: -0.5px;
+    text-shadow: 0 2px 10px rgba(255, 255, 255, 0.1);
+}
+
+header p {
+    color: var(--text-muted);
+    font-size: 1.1rem;
+    margin-top: 0.5rem;
+}
+
+/* --- CONTENEDOR PRINCIPAL --- */
+.dashboard-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+/* --- TARJETAS DE CRISTAL (Glass Cards) --- */
+.card {
+    background-color: var(--card-bg);
+    border: var(--card-border);
+    border-radius: var(--radio-bordes);
+    padding: 2rem;
+    box-shadow: var(--sombra-suave);
+    
+    backdrop-filter: var(--glass-blur);
+    -webkit-backdrop-filter: var(--glass-blur); 
+}
+
+.card h2 {
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+    font-weight: 600;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    padding-bottom: 1rem;
+    color: var(--text-main);
+}
+
+/* --- GRID DE BALANCES --- */
+.balance-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+}
+
+.balance-item {
+    padding: 1.5rem;
+    border-radius: 16px;
+    background-color: rgba(0, 0, 0, 0.2); 
+    border: 1px solid rgba(255, 255, 255, 0.03);
+    text-align: center;
+    transition: transform 0.3s ease;
+}
+
+.balance-item:hover {
+    transform: translateY(-5px); 
+}
+
+.balance-item h3 {
+    font-size: 1rem;
+    color: var(--text-muted);
+    font-weight: 400;
+    margin-bottom: 0.5rem;
+}
+
+.balance-item p {
+    font-size: 2.2rem;
+    font-weight: 700;
+    letter-spacing: -1px;
+}
+
+.ingresos p { color: var(--color-ingreso); text-shadow: 0 0 15px rgba(16, 185, 129, 0.3); }
+.gastos p { color: var(--color-gasto); text-shadow: 0 0 15px rgba(239, 68, 68, 0.3); }
+.diferencia p { color: var(--text-main); }
+
+/* --- TABLAS --- */
+.tabla-contenedor {
+    overflow-x: auto;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th, td {
+    padding: 1rem;
+    text-align: left;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+th {
+    color: var(--text-muted);
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 0.85rem;
+    letter-spacing: 1px;
+}
+
+/* Etiquetas (Badges) */
+.badge {
+    padding: 0.4rem 0.8rem;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    border: 1px solid transparent;
+}
+
+.badge.pago {
+    background-color: rgba(16, 185, 129, 0.15);
+    color: var(--color-ingreso);
+    border-color: rgba(16, 185, 129, 0.3);
+}
+
+.badge.pendiente {
+    background-color: rgba(239, 68, 68, 0.15);
+    color: var(--color-gasto);
+    border-color: rgba(239, 68, 68, 0.3);
+}
+
+/* --- FORMULARIOS --- */
+.form-inline {
+    display: flex;
+    gap: 1rem;
+}
+
+.form-group {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 1.5rem;
+}
+
+label {
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    color: var(--text-muted);
+    font-size: 0.95rem;
+}
+
+input, select {
+    padding: 0.8rem 1rem;
+    background-color: rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: var(--text-main);
+    border-radius: 12px;
+    font-size: 1rem;
+    outline: none;
+    transition: all 0.3s ease;
+}
+
+select option {
+    background-color: var(--bg-color);
+    color: var(--text-main);
+}
+
+input:focus, select:focus {
+    border-color: var(--color-primario);
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
+}
+
+input::placeholder {
+    color: rgba(255, 255, 255, 0.2);
+}
+
+.btn-guardar {
+    background-color: var(--color-primario);
+    color: white;
+    border: none;
+    padding: 1rem 2rem;
+    font-size: 1rem;
+    font-weight: 600;
+    border-radius: 12px;
+    cursor: pointer;
+    width: 100%;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(59, 130, 246, 0.4);
+}
+
+.btn-guardar:hover {
+    background-color: #2563EB;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(59, 130, 246, 0.6);
+}
