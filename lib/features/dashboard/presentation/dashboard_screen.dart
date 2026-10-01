@@ -56,7 +56,8 @@ class _DashboardView extends ConsumerWidget {
         ),
         CupertinoSliverRefreshControl(
           onRefresh: () async {
-            await ref.refresh(dashboardProvider.future);
+            ref.invalidate(dashboardProvider);
+            await ref.read(dashboardProvider.future);
           },
         ),
         SliverPadding(
@@ -170,7 +171,7 @@ class _BalanceCard extends StatelessWidget {
           tween: Tween<double>(begin: 0, end: data.balanceAfterAll),
           duration: const Duration(milliseconds: 800),
           curve: Curves.easeOutCubic,
-          builder: (_, v, __) => Text(
+          builder: (_, v, _) => Text(
             Fmt.money(v),
             style: const TextStyle(
               color: Colors.white,
@@ -246,7 +247,7 @@ class _WalletsRow extends StatelessWidget {
           physics: const BouncingScrollPhysics(),
           clipBehavior: Clip.none,
           itemCount: wallets.length,
-          separatorBuilder: (_, __) => const SizedBox(width: 12),
+          separatorBuilder: (_, _) => const SizedBox(width: 12),
           itemBuilder: (_, i) => _WalletTile(wallet: wallets[i]),
         ),
       );
