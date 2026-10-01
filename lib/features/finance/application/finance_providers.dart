@@ -2,10 +2,15 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:monetiar/features/finance/data/mock_finance_repository.dart';
 import 'package:monetiar/features/finance/domain/finance_repository.dart';
+import 'package:monetiar/core/config/env.dart';
+import 'package:monetiar/features/auth/application/auth_providers.dart';
+import 'package:monetiar/features/finance/data/supabase_finance_repository.dart';
 
 /// Punto único de inyección: al pasar a Supabase solo cambia esta línea.
-final financeRepositoryProvider =
-    Provider<FinanceRepository>((ref) => MockFinanceRepository());
+final financeRepositoryProvider = Provider<FinanceRepository>((ref) {
+  if (Env.useMock) return MockFinanceRepository();
+  return SupabaseFinanceRepository(ref.watch(supabaseClientProvider));
+});
 
 class SelectedMonthNotifier extends Notifier<DateTime> {
   @override

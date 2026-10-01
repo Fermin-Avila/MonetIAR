@@ -13,6 +13,8 @@ import 'package:monetiar/features/finance/domain/month_summary.dart';
 import 'package:monetiar/features/finance/domain/transaction.dart';
 import 'package:monetiar/features/finance/domain/wallet.dart';
 import 'package:monetiar/features/finance/presentation/category_icons.dart';
+import 'package:monetiar/core/config/env.dart';
+import 'package:monetiar/features/auth/application/auth_providers.dart';
 
 class DashboardScreen extends ConsumerWidget {
   const DashboardScreen({super.key});
@@ -53,6 +55,13 @@ class _DashboardView extends ConsumerWidget {
             Fmt.monthYear(data.month),
             style: TextStyle(color: Theme.of(context).colorScheme.onSurfaceVariant),
           ),
+          leading: Env.useMock
+            ? null
+            : CupertinoButton(
+              padding: EdgeInsets.zero,
+              onPressed: () => ref.read(supabaseClientProvider).auth.signOut(),
+              child: const Icon(CupertinoIcons.square_arrow_right, size: 22),
+              ),
         ),
         CupertinoSliverRefreshControl(
           onRefresh: () async {
