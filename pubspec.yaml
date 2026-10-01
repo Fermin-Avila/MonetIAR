@@ -39,6 +39,8 @@ dependencies:
   intl: ^0.20.3
   flutter_localizations:
     sdk: flutter
+  supabase_flutter: ^2.18.0
+  local_auth: 2.3.0
 
 dev_dependencies:
   flutter_test:
