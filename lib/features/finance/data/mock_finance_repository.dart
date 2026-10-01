@@ -8,9 +8,22 @@ import 'package:monetiar/features/finance/domain/transaction.dart';
 import 'package:monetiar/features/finance/domain/wallet.dart';
 
 class MockFinanceRepository implements FinanceRepository {
+  // Estado en memoria para que el modo mock también permita alta/edición/baja.
+  final _added = <Transaction>[];
+  final _edits = <String, Transaction>{};
+  final _paid = <String, bool>{};
+  final _deleted = <String>{};
+  var _seq = 0;
+
   Future<T> _latency<T>(T value) async {
     await Future<void>.delayed(const Duration(milliseconds: 250));
     return value;
+  }
+
+  Transaction _apply(Transaction t) {
+    final e = _edits[t.id] ?? t;
+    final p = _paid[t.id];
+    return p == null ? e : e.copyWith(isPaid: p);
   }
 
   @override
@@ -63,7 +76,7 @@ class MockFinanceRepository implements FinanceRepository {
     const debit = PaymentMethod.debit;
     const transfer = PaymentMethod.transfer;
 
-    return _latency([
+    final base = <Transaction>[
       Transaction(
         id: 'tx-in-1',
         title: 'Sueldo',
@@ -105,6 +118,12 @@ class MockFinanceRepository implements FinanceRepository {
       e('Peajes', 6893.10, 'ocio', debit, 7),
       e('Compra dólares', 140000, 'tcredito', debit, 4),
       e('Ropa', 35000, 'fer', transfer, 8),
+    ];
+
+    return _latency([
+      for (final t in base)
+        if (!_deleted.contains(t.id)) _apply(t),
+      ..._added.where((t) => t.date.year == month.year && t.date.month == month.month),
     ]);
   }
 
@@ -154,4 +173,40 @@ class MockFinanceRepository implements FinanceRepository {
             expenses: _expenses[i],
           ),
       ]);
+
+  // ─────────────── Escritura (en memoria) ───────────────
+
+  @override
+  Future<Transaction> addTransaction(Transaction t) async {
+    final created = Transaction.fromJson({...t.toJson(), 'id': 'mock-${_seq++}'});
+    _added.add(created);
+    return created;
+  }
+
+  @override
+  Future<Transaction> updateTransaction(Transaction t) async {
+    final i = _added.indexWhere((e) => e.id == t.id);
+    if (i >= 0) {
+      _added[i] = t;
+    } else {
+      _edits[t.id] = t;
+    }
+    return t;
+  }
+
+  @override
+  Future<void> deleteTransaction(String id) async {
+    _added.removeWhere((e) => e.id == id);
+    _deleted.add(id);
+  }
+
+  @override
+  Future<void> setTransactionPaid(String id, bool paid) async {
+    final i = _added.indexWhere((e) => e.id == id);
+    if (i >= 0) {
+      _added[i] = _added[i].copyWith(isPaid: paid);
+    } else {
+      _paid[id] = paid;
+    }
+  }
 }

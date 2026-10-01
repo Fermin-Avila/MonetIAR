@@ -2,9 +2,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:monetiar/core/theme/app_theme.dart';
-import 'package:monetiar/features/dashboard/presentation/dashboard_screen.dart';
 import 'package:monetiar/core/config/env.dart';
 import 'package:monetiar/features/auth/presentation/auth_gate.dart';
+import 'package:monetiar/features/home/presentation/home_shell.dart';
 
 class MonetiArApp extends StatelessWidget {
   const MonetiArApp({super.key});
@@ -24,7 +24,7 @@ class MonetiArApp extends StatelessWidget {
         GlobalWidgetsLocalizations.delegate,
         GlobalCupertinoLocalizations.delegate,
       ],
-      home: Env.useMock ? const DashboardScreen() : const AuthGate(),
+      home: Env.useMock ? const HomeShell() : const AuthGate(),
     );
   }
 }

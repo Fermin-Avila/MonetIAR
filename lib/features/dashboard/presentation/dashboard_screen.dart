@@ -15,6 +15,8 @@ import 'package:monetiar/features/finance/domain/wallet.dart';
 import 'package:monetiar/features/finance/presentation/category_icons.dart';
 import 'package:monetiar/core/config/env.dart';
 import 'package:monetiar/features/auth/application/auth_providers.dart';
+import 'package:monetiar/features/finance/presentation/month_selector.dart';
+
 
 class DashboardScreen extends ConsumerWidget {
   const DashboardScreen({super.key});
@@ -51,10 +53,7 @@ class _DashboardView extends ConsumerWidget {
           border: null,
           backgroundColor:
               Theme.of(context).scaffoldBackgroundColor.withValues(alpha: 0.85),
-          trailing: Text(
-            Fmt.monthYear(data.month),
-            style: TextStyle(color: Theme.of(context).colorScheme.onSurfaceVariant),
-          ),
+          trailing: const MonthSelector(),
           leading: Env.useMock
             ? null
             : CupertinoButton(
@@ -208,6 +207,7 @@ class _BalanceCard extends StatelessWidget {
             style: const TextStyle(color: Colors.white70, fontSize: 12)),
         const SizedBox(height: 16),
         Row(children: [
+          _Stat(label: 'En cuentas', value: data.walletsAvailable),
           _Stat(label: 'Ingresos', value: data.income),
           _Stat(label: 'Pagado', value: data.paidExpenses),
           _Stat(label: 'Pendiente', value: data.pendingExpenses),

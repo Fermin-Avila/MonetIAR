@@ -11,4 +11,8 @@ abstract interface class FinanceRepository {
   Future<List<Transaction>> transactions(DateTime month);
   Future<List<InstallmentPlan>> installmentPlans(DateTime month);
   Future<List<MonthSummary>> previousMonths(DateTime month);
+  Future<Transaction> addTransaction(Transaction t);
+  Future<Transaction> updateTransaction(Transaction t);
+  Future<void> deleteTransaction(String id);
+  Future<void> setTransactionPaid(String id, bool paid);
 }

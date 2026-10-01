@@ -5,7 +5,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:monetiar/features/auth/application/auth_providers.dart';
 import 'package:monetiar/features/auth/presentation/biometric_gate.dart';
 import 'package:monetiar/features/auth/presentation/login_screen.dart';
-import 'package:monetiar/features/dashboard/presentation/dashboard_screen.dart';
+import 'package:monetiar/features/home/presentation/home_shell.dart';
 
 class AuthGate extends ConsumerWidget {
   const AuthGate({super.key});
@@ -19,7 +19,7 @@ class AuthGate extends ConsumerWidget {
           error: (_, _) => const LoginScreen(),
           data: (session) => session == null
               ? const LoginScreen()
-              : const BiometricGate(child: DashboardScreen()),
+              : const BiometricGate(child: HomeShell()),
         );
   }
 }

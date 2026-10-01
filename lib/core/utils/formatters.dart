@@ -17,4 +17,7 @@ abstract final class Fmt {
       DateFormat('d MMM', 'es_AR').format(d).replaceAll('.', '');
 
   static String _cap(String s) => s.isEmpty ? s : s[0].toUpperCase() + s.substring(1);
+
+  static String dayHeader(DateTime d) =>
+      _cap(DateFormat('EEE d MMM', 'es_AR').format(d).replaceAll('.', ''));
 }

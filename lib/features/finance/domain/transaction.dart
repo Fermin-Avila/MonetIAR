@@ -79,7 +79,7 @@ class Transaction {
         'type': type.name,
         'category_id': categoryId,
         'payment_method': paymentMethod.name,
-        'date': date.toIso8601String(),
+        'date': '${date.year.toString().padLeft(4, '0')}-${date.month.toString().padLeft(2, '0')}-${date.day.toString().padLeft(2, '0')}',
         'is_paid': isPaid,
         'wallet_id': walletId,
         'note': note,

@@ -52,6 +52,14 @@ class DashboardData {
 
   double get spentRatio => income <= 0 ? 0 : (expenses / income).clamp(0.0, 1.0).toDouble();
 
+  /// Saldo real hoy: bancos, billeteras virtuales y efectivo (sin tarjeta ni inversiones).
+  double get walletsAvailable => wallets
+      .where((w) =>
+          w.type == WalletType.bank ||
+          w.type == WalletType.virtual ||
+          w.type == WalletType.cash)
+      .fold<double>(0, (s, w) => s + w.balance);
+
   Category categoryOf(Transaction t) => categories.firstWhere(
         (c) => c.id == t.categoryId,
         orElse: () => uncategorized,

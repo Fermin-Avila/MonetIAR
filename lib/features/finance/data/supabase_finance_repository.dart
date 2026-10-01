@@ -47,6 +47,34 @@ class SupabaseFinanceRepository implements FinanceRepository {
   }
 
   @override
+  Future<Transaction> addTransaction(Transaction t) async {
+    final row =
+        await _db.from('transactions').insert(t.toJson()..remove('id')).select().single();
+    return Transaction.fromJson(row);
+  }
+
+  @override
+  Future<Transaction> updateTransaction(Transaction t) async {
+    final row = await _db
+        .from('transactions')
+        .update(t.toJson()..remove('id'))
+        .eq('id', t.id)
+        .select()
+        .single();
+    return Transaction.fromJson(row);
+  }
+
+  @override
+  Future<void> deleteTransaction(String id) async {
+    await _db.from('transactions').delete().eq('id', id);
+  }
+
+  @override
+  Future<void> setTransactionPaid(String id, bool paid) async {
+    await _db.from('transactions').update({'is_paid': paid}).eq('id', id);
+  }
+
+  @override
   Future<List<MonthSummary>> previousMonths(DateTime month) async {
     const count = 5;
     final from = DateTime(month.year, month.month - count);
